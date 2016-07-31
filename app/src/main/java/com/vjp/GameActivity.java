@@ -1,5 +1,11 @@
 package com.vjp;
 
+import android.content.Context;
+import android.os.Vibrator;
+
+import com.vjp.resource.BaseResource;
+import com.vjp.util.SceneManager;
+
 import org.andengine.engine.Engine;
 import org.andengine.engine.LimitedFPSEngine;
 import org.andengine.engine.camera.BoundCamera;
@@ -38,12 +44,15 @@ public class GameActivity extends BaseGameActivity {
     // #3
     public void onCreateResources(OnCreateResourcesCallback pOnCreateResourcesCallback) throws IOException
     {
+        BaseResource.setBaseResource(mEngine, this, camera, getVertexBufferObjectManager());
         pOnCreateResourcesCallback.onCreateResourcesFinished();
     }
 
     // #4
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws IOException
     {
+        SceneManager.getInstance().createSplashScene(pOnCreateSceneCallback);
+        pOnCreateSceneCallback.onCreateSceneFinished(SceneManager.getInstance().splashScene);
     }
 
     //#5
